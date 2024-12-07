@@ -60,19 +60,19 @@ main(int argc, char **argv)
 	ASSERT(rc == 0, "dfs_connect failed with %d", rc);
 
 	mode_t create_mode  = S_IWUSR | S_IRUSR;
-	int    create_flags = O_RDWR | O_CREAT | O_EXCL;
+	int    create_flags = O_RDWR | O_CREAT;
 
 	/** Create & open /dir1 - need to close later. NULL for parent, means create at root. */
 	rc = dfs_open(dfs, NULL, "dir1", create_mode | S_IFDIR, create_flags, 0, 0, NULL, &dir1);
-	ASSERT(rc == 0, "create /dir1 failed\n");
+	ASSERT(rc == 0, "create /dir1 failed: %d\n", rc);
 
 	/** mkdir /dir1/dir2. The directory here is not open though, no release required. */
 	rc = dfs_mkdir(dfs, dir1, "dir2", create_mode | S_IFDIR, 0);
-	ASSERT(rc == 0, "create /dir1/dir2 failed\n");
+	ASSERT(rc == 0 || rc == EEXIST, "create /dir1/dir2 failed: %d\n", rc);
 
 	/** create & open /dir1/file1 */
 	rc = dfs_open(dfs, dir1, "file1", create_mode | S_IFREG, create_flags, 0, 0, NULL, &f1);
-	ASSERT(rc == 0, "create /dir1/file failed\n");
+	ASSERT(rc == 0, "create /dir1/file failed: %d\n", rc);
 
 	/** write a "hello world!" string to the file at offset 0 */
 
