@@ -1,0 +1,18 @@
+---
+BasedOnStyle: LLVM
+UseTab: Never
+IndentWidth: 4
+TabWidth: 4
+BreakBeforeBraces: Linux
+AllowShortIfStatementsOnASingleLine: false
+IndentCaseLabels: true
+IndentGotoLabels: false
+IndentPPDirectives: AfterHash
+ColumnLimit: 80
+AccessModifierOffset: -4
+AlignAfterOpenBracket: DontAlign
+AlignConsecutiveMacros: true
+AlwaysBreakAfterReturnType: All
+SpaceAfterCStyleCast: true
+ForEachMacros: ['SLIST_FOREACH','LIST_FOREACH','STAILQ_FOREACH','TAILQ_FOREACH','TAILQ_FOREACH_REVERSE','CIRCLEQ_FOREACH','CIRCLEQ_FOREACH_REVERSE']
+...
